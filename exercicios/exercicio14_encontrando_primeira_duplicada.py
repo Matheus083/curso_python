@@ -28,20 +28,21 @@ lista_de_listas_de_inteiros = [
 
 
 def first_duplicate(array):
-    items = set()
-    counter = 0
+    items = []
 
     for list_int in array:
-        counter += 1
         for j in list_int:
-            if len(array) == 9:
-                items.clear()
             if j not in items:
-                items.add(j) 
-            else:
+                items.append(j)
+            elif j in items:
                 print(f'The first duplicate is: {j} in the list {list_int}')
-                break
-
+                items.clear() 
+                break            
+            if len(items) == 9:
+                items.clear() 
     
 
+
+
 first_duplicate(lista_de_listas_de_inteiros)
+
