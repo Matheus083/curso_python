@@ -1,15 +1,14 @@
-# Escopo global
+import os
+from google import genai
 
-def show_namespace() -> None:
-    # Escopo local
-    module_namespace = globals()
-    print("Conteúdo de globals():", module_namespace)
+# Inicialize o cliente (ele buscará automaticamente a variável de ambiente GEMINI_API_KEY)
+# Como alternativa, você pode passar a chave diretamente: client = genai.Client(api_key="SUA_CHAVE")
+client = genai.Client(apy_key=)
 
-    # Note que 'function_namespace' não aparecerá no locals() se chamado antes dela
-    function_namespace = locals()
-    print("Conteúdo de locals():", function_namespace)
+# Gere conteúdo utilizando um modelo, como o 'gemini-2.5-flash'
+response = client.models.generate_content(
+    model='gemini-2.5-flash',
+    contents='Me fale sobre a linguagem de programação Python.',
+)
 
-
-if __name__ == "__main__":
-    show_namespace()
-    
+print(response.text)
