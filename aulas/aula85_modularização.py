@@ -9,8 +9,12 @@
 # nos caminhos de sys.path
 
 import aula86_teste_mod
-from aula86_teste_mod import variable
+# from aula86_teste_mod import variable
+# import sys
 
-print('Called: ', __name__)
-print('Variable: ', aula86_teste_mod.variable)
-print('Variable: ', variable)
+# print('Called: ', __name__)
+# print('Variable: ', aula86_teste_mod.variable)
+# print('Variable: ', variable)
+# print('Sys.path: ', sys.path, sep='\n')
+# print('')
+# print('Sys.modules: ', sys.modules, sep='\n')
