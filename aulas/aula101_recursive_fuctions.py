@@ -9,11 +9,13 @@
 # https://brasilescola.uol.com.br/matematica/fatorial.htm
 
 def recursive(started=0, finished=10):
+    print('started', started, 'finished', finished)
+
     # Caso base.
     if started >= finished:
         return print(finished)
 
-    print(started)
+    # print(started)
     
     # Caso recursivo.
     # Contar até chegar ao final.
@@ -21,5 +23,14 @@ def recursive(started=0, finished=10):
     return recursive(started, finished)
 
 
-recursive()
+# recursive()
+
+def factorial(n):
+    if n == 1:
+        return 1
+    
+    print("The N is: ", n)
+    return n * factorial(n - 1)
+
+print(factorial(5))
 
