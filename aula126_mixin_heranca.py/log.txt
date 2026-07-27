@@ -1,0 +1,5 @@
+Sucess: Good! (LogFileMixin)
+Error: Hello (LogFileMixin)
+Sucess: Good! (LogFileMixin)
+Sucess: Galaxy S is ON. (Smartphone)
+Error: Galaxy S is ON. (Smartphone)
