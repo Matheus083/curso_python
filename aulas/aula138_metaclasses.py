@@ -22,14 +22,35 @@
 # com certeza que precisam delas e não precisam de uma explicação
 # sobre o porquê)."
 # — Tim Peters (CPython Core Developer)
-# class Foo(object):
-#     pass
 
-# test = Foo()
-Foo = type('Foo', (object), {})
-test = Foo()
+def my_repr(self):
+    return f'{type(self).__name__}({self.__dict__})'
 
+class Meta(type):
+    def __new__(mcs, name, bases, dct):
+        print('MY NEW')
+        cls = super().__new__(mcs, name, bases, dct)
+        cls.attr = 1234
+        cls.__repr__ = my_repr
+        return cls
 
-print(isinstance(test, Foo))
-print(type(test))
-print(type(Foo))
+    def __call__(self, *args, **kwds):
+        instance = super().__call__(*args, **kwds)
+        print(instance.__dict__)
+        return instance
+
+class Person(object, metaclass=Meta):
+    def __new__(cls, *args, **kwargs):
+        print('MY NAME')
+        instance = super().__new__(cls)
+        return instance
+
+    def __init__(self, name):
+        print('MY INIT') 
+        self.name = name
+
+p1 = Person('Matheus')
+print(p1)
+# print(p1.attr)
+# print(Person.attr)
+ 
