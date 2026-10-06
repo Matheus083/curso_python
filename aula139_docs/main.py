@@ -1,3 +1,4 @@
-import tests
+import documentando_classes
 
-help(tests)
+help(documentando_classes)
+
