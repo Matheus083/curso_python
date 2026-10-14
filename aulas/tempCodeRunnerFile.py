@@ -1,2 +1,2 @@
-print(p1.attr)
-print(Person.attr)
+move(directions.LEFT)  # Moving in the LEFT
+move(directions.RIGHT)  # Moving in the RIGHT
