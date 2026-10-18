@@ -1,4 +1,6 @@
-class Person:
+from abc import ABC, abstractmethod
+
+class Person(ABC):
     def __init__(self, name, age):
         self._name = name
         self._age = age
@@ -22,10 +24,23 @@ class Person:
     def age(self, value):
         self._age = value
 
+    @abstractmethod
+    def __str__(self):
+        pass
+
 class Client(Person):
-    def __init__(self, name, age, type_account):
+    def __init__(self, name, age, account):
         super().__init__(name, age)
-        self._type_account = type_account
+        self._account = account
+
+    @property
+    def account(self):
+        return self._account
+
+    @account.setter
+    def account(self, account):
+        self._account = account
 
     def __str__(self):
-        return f"Name: {self.name}, Age: {self.age}, Type Account: {self._type_account}"
+        return f"Name: {self.name}, Age: {self.age}, Account: {self.account}"
+    

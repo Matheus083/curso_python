@@ -2,38 +2,42 @@ from accounts import CurrentAccount, SavingsAccount
 from persons import Client
 from bank import Bank
 
+
 if __name__ == "__main__":
-    client = Client("John", 20, "Current")
-    savings_account = SavingsAccount(12235, 54321)
+    # Cria o banco com sua agência
+    bank = Bank("Bank of America", 12235)
+
+    # Cria as contas
     current_account = CurrentAccount(12235, 12345)
-    bank_current = Bank("Bank of America", client, current_account)
-    bank_savings = Bank("Bank of America", client, savings_account)
+    savings_account = SavingsAccount(12235, 54321)
 
-    savings_account.deposit(500)
+    # Cria clientes vinculados às respectivas contas
+    current_client = Client("John", 20, current_account)
+    savings_client = Client("Mary", 25, savings_account)
+
+    # Cadastra os clientes e suas contas no banco
+    bank.add_client(current_client)
+    bank.add_client(savings_client)
+
+    # Realiza depósitos
     current_account.deposit(1000)
-    savings_account.deposit(1000)
-    current_account.deposit(500)
-    savings_account.withdraw(200)
-    current_account.withdraw(1500)
+    savings_account.deposit(500)
 
-    savings_account.deposit(-100)  # This will raise a ValueError and print an error message
-    current_account.deposit(-100)  # This will raise a ValueError and print an error message
+    print("=== Saques autorizados ===")
+    bank.withdraw(current_client, current_account, 200)
+    bank.withdraw(savings_client, savings_account, 100)
 
-    savings_account.deposit(0)  # This will raise a ValueError and print an error message
-    current_account.deposit(0)  # This will raise a ValueError and print an error message
+    print(current_client)
+    print(savings_client)
 
-    savings_account.withdraw(-100)  # This will raise a ValueError and print an error message
-    current_account.withdraw(-100)  # This will raise a ValueError and print an error message
+    print("\n=== Teste de autenticação ===")
 
-    savings_account.withdraw(0)  # This will raise a ValueError and print an error message
-    current_account.withdraw(0)  # This will raise a ValueError and print an error message
+    # Cliente cadastrado tentando sacar de conta alheia
+    bank.withdraw(current_client, savings_account, 50)
 
-    savings_account.deposit(8800)
-    current_account.deposit(12500)
+    # Conta de agência diferente
+    external_account = SavingsAccount(99999, 77777)
+    bank.withdraw(current_client, external_account, 50)
 
-    savings_account.withdraw(3720)
-    current_account.withdraw(6500)
-
-    print(bank_savings)
-    print("=" * 60)
-    print(bank_current)
+    print("\n=== Estado do banco ===")
+    print(bank)
