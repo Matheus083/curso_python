@@ -1,5 +1,5 @@
 class Bank:
-    def __init__(self, name_bank, agency):
+    def __init__(self, name_bank: str, agency: int) -> None:
         self._name_bank = name_bank
         self._agency = agency
         self._clients = []

@@ -1,46 +1,39 @@
-from abc import ABC, abstractmethod
-
-class Person(ABC):
-    def __init__(self, name, age):
+class Person():
+    def __init__(self, name: str, age: int) -> None:
         self._name = name
         self._age = age
 
-    def __str__(self):
-        return f"Name: {self.name}, Age: {self.age}"
-
     @property
-    def name(self):
+    def name(self) -> str:
         return self._name
 
     @name.setter
-    def name(self, value):
+    def name(self, value: str) -> None:
         self._name = value
 
     @property
-    def age(self):
+    def age(self) -> int:
         return self._age
 
     @age.setter
-    def age(self, value):
+    def age(self, value: int) -> None:
         self._age = value
 
-    @abstractmethod
-    def __str__(self):
-        pass
+    def __str__(self) -> str:
+        return f"Name: {self.name}, Age: {self.age}"
 
 class Client(Person):
-    def __init__(self, name, age, account):
+    def __init__(self, name: str, age: int, account: int | None) -> None:
         super().__init__(name, age)
         self._account = account
 
     @property
-    def account(self):
+    def account(self) -> int:
         return self._account
 
     @account.setter
-    def account(self, account):
+    def account(self, account: int) -> None:
         self._account = account
 
-    def __str__(self):
+    def __str__(self) -> str:
         return f"Name: {self.name}, Age: {self.age}, Account: {self.account}"
-    

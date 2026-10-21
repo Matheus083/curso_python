@@ -1,36 +1,44 @@
 from abc import ABC, abstractmethod
 
 class Account(ABC):
-    def __init__(self, agency, account_number):
+    def __init__(self, agency: int, account_number: int):
         self.__agency = agency
         self.__account_number = account_number
         self._balance = 0
 
+    @abstractmethod
+    def withdraw(self, value: float) -> float:
+        pass
+
+    @abstractmethod
+    def __str__(self) -> str:
+        pass
+
     @property
-    def agency(self):
+    def agency(self) -> int:
         return self.__agency
 
     @agency.setter
-    def agency(self, value):
+    def agency(self, value: int) -> None:
         self.__agency = value
     
     @property
-    def account_number(self):
+    def account_number(self) -> int:
         return self.__account_number
 
     @account_number.setter
-    def account_number(self, value):
+    def account_number(self, value: int) -> None:
         self.__account_number = value
 
     @property
-    def balance(self):
+    def balance(self) -> float:
         return self._balance
 
     @balance.setter
-    def balance(self, value):
+    def balance(self, value: float) -> None:
         self._balance = value
 
-    def deposit(self, value):
+    def deposit(self, value: float) -> float:
         try:
             if value <= 0:
                 raise ValueError("The value must be a number greater than zero.")
@@ -41,20 +49,12 @@ class Account(ABC):
             e.add_note("The value must be a number.")
             return self._balance
 
-    @abstractmethod
-    def withdraw(self, value):
-        pass
-
-    @abstractmethod
-    def __str__(self):
-        pass
-
 class CurrentAccount(Account):
-    def __init__(self, agency, account_number):
+    def __init__(self, agency: int, account_number: int) -> None:
         super().__init__(agency, account_number)
         self._limit = 200 
 
-    def withdraw(self, value):
+    def withdraw(self, value: float) -> float:
         try:
             if value <= 0 or value == 0:
                 raise ValueError("The value must be a number greater than zero.")
@@ -81,10 +81,10 @@ class CurrentAccount(Account):
         return f"Agency: {self.agency}, Account Number: {self.account_number}, Balance: {self._balance}, Limit: {self._limit}"
     
 class SavingsAccount(Account):
-    def __init__(self, agency, account_number):
+    def __init__(self, agency: int, account_number: int) -> None:
         super().__init__(agency, account_number)
 
-    def withdraw(self, value):
+    def withdraw(self, value: float) -> float:
         try:
             if value <= 0 or value == 0:
                 raise ValueError("The value must be a number greater than zero.")
