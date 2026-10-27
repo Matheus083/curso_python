@@ -6,31 +6,16 @@
 # Foi descrito na PEP 557 e adicionado na versão 3.7 do Python.
 # doc: https://docs.python.org/3/library/dataclasses.html
 
-from dataclasses import dataclass
-
-@dataclass(init=False)
+from dataclasses import dataclass, field, fields
+@dataclass
 class Person:
     name: str
-    lastname: str
+    lastname: str = 'Nunes'
+    age: int = 50
+    address: list[str] = field(default_factory=list)
 
-    def __init__(self, name, lastname):
-        self.name = name
-        self.lastname = lastname
-        self.full_name = f"{self.name} {self.lastname}"
-
-    # def __post_init__(self):
-    #     self.full_name = f"{self.name} {self.lastname}"
-
-    # @property
-    # def fullname(self):
-    #     return f'{self.name} {self.lastname}'
-
-    # @fullname.setter
-    # def fullname(self, value):
-    #     name, lastname = value.split(' ')
-    #     self.name = name
-    #     self.lastname = lastname
 
 if __name__ == '__main__':
-    person = Person('John', 'Doe')
-    print(person.full_name)
+    p1 = Person('Matheus')
+    # print(fields(p1))
+    print(p1)
